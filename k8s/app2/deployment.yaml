@@ -3,7 +3,7 @@ kind: Namespace
 metadata:
   name: app-service2
   labels:
-    name: app-service
+    name: app-service2
 
 ---
 apiVersion: apps/v1
@@ -44,5 +44,5 @@ spec:
   type: "LoadBalancer"
   ports:
     - protocol: "TCP"
-      port: 90
-      targetPort: 4000
+      port: 80
+      targetPort: 3000
