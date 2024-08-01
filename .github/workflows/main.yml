@@ -32,13 +32,13 @@ jobs:
         password: ${{secrets.DOCKER_PWD}}
         
     - name: Build Docker image version tag
-      run: docker build -t ${{ secrets.DOCKER_USER }}/astfx-gatserv:v1.${{ github.run_number }}.${{ steps.commit_hash.outputs.hash }} .
+      run: docker build -t ${{ secrets.DOCKER_USER }}/app-k8s:v1.${{ github.run_number }}.${{ steps.commit_hash.outputs.hash }} .
 
     - name: Build Docker image latest tag
-      run: docker build -t ${{ secrets.DOCKER_USER }}/astfx-gatserv:latest .
+      run: docker build -t ${{ secrets.DOCKER_USER }}/app-k8s:latest .
 
     - name: Push image Docker with version tag
-      run: docker push ${{ secrets.DOCKER_USER }}/astfx-gatserv:v1.${{ github.run_number }}.${{ steps.commit_hash.outputs.hash }}
+      run: docker push ${{ secrets.DOCKER_USER }}/app-k8s:v1.${{ github.run_number }}.${{ steps.commit_hash.outputs.hash }}
 
     - name: Push image Docker with latest tag 
-      run: docker push ${{ secrets.DOCKER_USER }}/astfx-gatserv:latest
+      run: docker push ${{ secrets.DOCKER_USER }}/app-k8s:latest
