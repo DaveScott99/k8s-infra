@@ -59,9 +59,21 @@ jobs:
           method: kubeconfig
           kubeconfig: ${{secrets.K8S_CONFIG}}
           
-      - name: Deploy to Kubernetes cluster
+      - name: Deploy to Kubernetes cluster APP 1
         uses: Azure/k8s-deploy@v4.9
         with:
           images: ${{ secrets.DOCKER_USER }}/app-k8s:v1.${{ github.run_number }}.${{ steps.commit_hash.outputs.hash }}
           manifests: |
-            k8s/deployment.yaml
+            k8s/app1/deployment.yaml
+          namespace: | 
+            app-service1
+            
+      - name: Deploy to Kubernetes cluster APP 2
+        uses: Azure/k8s-deploy@v4.9
+        with:
+          images: ${{ secrets.DOCKER_USER }}/app-k8s:v1.${{ github.run_number }}.${{ steps.commit_hash.outputs.hash }}
+          manifests: |
+            k8s/app2/deployment.yaml
+          namespace: | 
+            app-service2
+
