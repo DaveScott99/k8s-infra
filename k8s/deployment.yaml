@@ -80,7 +80,7 @@ spec:
         - name: app-service2
           image: davescott99/app-k8s
           ports:
-            - containerPort: 4000
+            - containerPort: 3000
 
 ---
 
