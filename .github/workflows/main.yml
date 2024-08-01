@@ -58,7 +58,7 @@ jobs:
       - name: Deploy to Kubernetes cluster
         uses: Azure/k8s-deploy@v4.9
         with:
-          images: ${{ secrets.DOCKER_USER }}/app-k8s:v1.${{ github.run_number }}.${{ steps.commit_hash.outputs.hash }}
+          images: davescott99/app-k8s:v1.14.1fd8896
           manifests: |
             k8s/deployment.yaml
             k8s/service.yaml
