@@ -10,7 +10,7 @@ metadata:
 apiVersion: v1
 kind: Namespace
 metadata: 
-  name: app-service1
+  name: app-service2
   labels:
     name: app-service2
 
