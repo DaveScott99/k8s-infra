@@ -12,18 +12,21 @@ jobs:
     - name: Chechout code
       uses: actions/checkout@v4.1.1
     
-    - name: Setup Java
-      uses: actions/setup-java@v4.0.0
+    - name: Setup NodeJS
+      uses: actions/setup-node@v4.0.3
       with:
-        distribution: 'temurin'
-        java-version: '17'
+        node-version: '22.x'
+        registry-url: 'https://registry.npmjs.org'
         
     - name: Get short commit hash
       id: commit_hash
       run: echo "::set-output name=hash::$(git rev-parse --short HEAD)"
           
-    - name: Build project
-      run: mvn clean install -DskipTests
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build App
+      run: node index.js
           
     - name: Login to Docker Hub
       uses: docker/login-action@343f7c4344506bcbf9b4de18042ae17996df046d
@@ -31,14 +34,8 @@ jobs:
         username: ${{secrets.DOCKER_USER}}
         password: ${{secrets.DOCKER_PWD}}
 
-    - name: Build Docker image version tag
-      run: docker build -t ${{ secrets.DOCKER_USER }}/astfx-gatserv:v1.${{ github.run_number }}.${{ steps.commit_hash.outputs.hash }} .
-
     - name: Build Docker image latest tag
-      run: docker build -t ${{ secrets.DOCKER_USER }}/astfx-gatserv:latest .
-
-    - name: Push image Docker with version tag
-      run: docker push ${{ secrets.DOCKER_USER }}/astfx-gatserv:v1.${{ github.run_number }}.${{ steps.commit_hash.outputs.hash }}
+      run: docker build -t ${{ secrets.DOCKER_USER }}/app-k8s:latest .
 
     - name: Push image Docker with latest tag 
-      run: docker push ${{ secrets.DOCKER_USER }}/astfx-gatserv:latest
+      run: docker push ${{ secrets.DOCKER_USER }}/app-k8s:latest
