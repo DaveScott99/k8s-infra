@@ -1,0 +1,39 @@
+{
+  "apiVersion": "apps/v1",
+  "kind": "Deployment",
+  "metadata": {
+    "name": "app-service",
+    "labels": {
+      "app": "app-service"
+    }
+  },
+  "spec": {
+    "replicas": 1,
+    "selector": {
+      "matchLabels": {
+        "app": "app-service"
+      }
+    },
+    "template": {
+      "metadata": {
+        "labels": {
+          "app": "app-service"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "app-service",
+            "image": "ltp-dev:latest",
+            "imagePullPolicy": "Never",
+            "ports": [
+              {
+                "containerPort": 80
+              }
+            ],
+          }
+        ]
+      }
+    }
+  }
+}
