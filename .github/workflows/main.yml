@@ -42,3 +42,15 @@ jobs:
 
     - name: Push image Docker with latest tag 
       run: docker push ${{ secrets.DOCKER_USER }}/app-k8s:latest
+
+  CD: 
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4.1.1
+
+      - name: Define K8S Context
+        uses: Azure/k8s-set-context@v3.0
+        with: 
+          method: kubeconfig
+          kubeconfig: ${{secrets.K8S_CONFIG}}
