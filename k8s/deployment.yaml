@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: app-service
-          image: davescott99/app-k8s:latest
+          image: davescott99/app-k8s
           ports:
             - containerPort: 3000
