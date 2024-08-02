@@ -1,0 +1,36 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-hosts
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  tls:
+    - hosts:
+      - "app1.astrohub.cloud"
+      secretName: "app-service-tls"
+    - hosts:
+      - "app2.astrohub.cloud"
+      secretName: "app-service2-tls"
+  ingressClassName: "nginx"
+  rules:
+    - host: app1.astrohub.cloud
+      http:
+        paths:
+          - pathType: "Prefix"
+            path: "/"
+            backend:
+              service:
+                name: app-service-test
+                port:
+                  number: 80
+    - host: app2.astrohub.cloud
+      http:
+        paths:
+          - pathType: "Prefix"
+            path: "/"
+            backend:
+              service:
+                name: app-service2-test
+                port:
+                  number: 90
