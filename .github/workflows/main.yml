@@ -64,5 +64,4 @@ jobs:
         with:
           images: ${{ secrets.DOCKER_USER }}/app-k8s:v1.${{ github.run_number }}.${{ steps.commit_hash.outputs.hash }}
           manifests: |
-            k8s/app1/deployment.yaml
-            k8s/app2/deployment.yaml
+            k8s/app/deployment.yaml
