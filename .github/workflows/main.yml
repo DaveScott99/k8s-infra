@@ -66,5 +66,3 @@ jobs:
           manifests: |
             k8s/app1/deployment.yaml
             k8s/app2/deployment.yaml
-            k8s/proxy/ingress.yaml
-            k8s/cert/issuer.yaml
